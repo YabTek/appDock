@@ -1,0 +1,20 @@
+{
+  "name": "simple-web-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js web app for learning Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [
+    "docker",
+    "nodejs",
+    "beginner"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}
