@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # Kubernetes API version for deployments (different from services and configmaps), it kind of standard 
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 3  # Run 3 copies of your app (number of pods for each container)
+  selector: # Tells kubernetes which pod belong to this deployment 
+    matchLabels:
+      app: myapp # Kubernetes will manage pods with label "app: myapp"
+  template: # blueprint for creating new pods
+    metadata:
+      labels:
+        app: myapp # adds this label to every pod created
+    spec:
+      containers: #list of containers to run in the pod
+      - name: app
+        image: simple-app:1.0  # docker image
+        ports:
+        - containerPort: 3000 # port from dockerfile
+        resources: # define resources kubernetes reserve for the pod
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
