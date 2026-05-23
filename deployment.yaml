@@ -14,7 +14,7 @@ spec:
     spec:
       containers: #list of containers to run in the pod
       - name: app
-        image: simple-app:1.0  # docker image
+        image: yabtekuam/myapp:latest  # docker image
         ports:
         - containerPort: 3000 # port from dockerfile
         resources: # define resources kubernetes reserve for the pod
