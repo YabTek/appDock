@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
     <body>
       <div class="container">
         <h1>🐳 Welcome to Simple App</h1>
-        <p>This is a basic Node.js/Express application!</p>
+        <p>This is a simple Node.js/Express application!</p>
         
         <h2>Available Endpoints:</h2>
         <div class="endpoint">
