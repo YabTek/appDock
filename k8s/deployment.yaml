@@ -24,3 +24,59 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
+
+
+#to enable ci pipeline to deploy to GKE
+# name: CI/CD Pipeline
+# on: [push, pull_request]
+
+# env:
+#   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+#   GKE_CLUSTER: my-cluster
+#   GKE_ZONE: us-central1-a
+#   GKE_PROJECT: my-project-id
+#   IMAGE_NAME: myapp
+#   REGISTRY: gcr.io
+
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: '18'
+#       - run: npm install
+#       - run: npm run lint
+
+#   build:
+#     needs: lint
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: '18'
+#       - run: npm install
+#       - run: npm test
+
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
+#     steps:
+#       - uses: actions/checkout@v4
+      
+#       # Authenticate to Google Cloud
+#       - uses: google-github-actions/auth@v2
+#         with:
+#           credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
+#       # Set up Cloud SDK
+#       - uses: google-github-actions/setup-gcloud@v2
+      
+#       # Configure kubectl for GKE
+#       - run: gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.GKE_PROJECT }}
+      
+#       # Deploy to Kubernetes
+#       - run: kubectl apply -f k8s/
