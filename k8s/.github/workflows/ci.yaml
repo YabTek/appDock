@@ -3,17 +3,17 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #runs on ubuntu machine runner
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3 #checkout/copy code from repo to runner
+      - uses: actions/setup-node@v3 #setup node environment on runner
         with:
-          node-version: '18'
+          node-version: '18' #specify node version, it will install this version on runner
       - run: npm install
       - run: npm run lint
 
   build:
-    needs: lint
+    needs: lint #runs only if lint passes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,9 +24,9 @@ jobs:
       - run: npm test
 
   deploy:
-    needs: build
+    needs: build  #runs only if build passes
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' #only runs on main branch
     steps:
       - uses: actions/checkout@v3
       - run: echo "Deploying to Kubernetes..."
