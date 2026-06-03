@@ -1,0 +1,13 @@
+name: CI Pipeline
+on: [push, pull_request]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest #runner on github
+    steps: 
+      - uses: actions/checkout@v3 #checkout code from github to runner
+      - uses: actions/setup-node@v3 #setup node environment on runner, we need it to run npm commands
+        with:
+          node-version: '18' # specify node version, it should match the version in our dockerfile
+      - run: npm install
+      - run: npm test
