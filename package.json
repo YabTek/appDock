@@ -8,7 +8,6 @@
     "dev": "node app.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
-
   },
   "keywords": [
     "docker",
@@ -19,5 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.22.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.4"
   }
 }
