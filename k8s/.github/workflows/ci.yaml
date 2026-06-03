@@ -1,13 +1,33 @@
 name: CI Pipeline
 on: [push, pull_request]
 
-jobs: 
-  build:
-    runs-on: ubuntu-latest #runner on github
-    steps: 
-      - uses: actions/checkout@v3 #checkout code from github to runner
-      - uses: actions/setup-node@v3 #setup node environment on runner, we need it to run npm commands
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18' # specify node version, it should match the version in our dockerfile
+          node-version: '18'
+      - run: npm install
+      - run: npm run lint
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
       - run: npm install
       - run: npm test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Deploying to Kubernetes..."
+      - run: kubectl apply -f k8s/
